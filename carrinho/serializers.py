@@ -15,7 +15,7 @@ class ItemCarrinhoSerializer(serializers.ModelSerializer):
     
 
 class CarrinhoSerializer(serializers.ModelSerializer):
-    itens = ItemCarrinhoSerializer(many=True, write_only=True)
+    itens = ItemCarrinhoSerializer(many=True, write_only=True, required=False)
     total = serializers.SerializerMethodField()
 
     class Meta:
@@ -25,5 +25,5 @@ class CarrinhoSerializer(serializers.ModelSerializer):
     def get_total(self, obj):
         return sum([item.produto.preco * item.quantidade for item in obj.itens.all()])
     
-
+    
     

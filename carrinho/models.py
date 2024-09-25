@@ -19,8 +19,12 @@ class ItemCarrinho(models.Model):
     produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     quantidade = models.PositiveIntegerField(default=1)
 
+    class Meta:
+        verbose_name = 'Itens do Carrinho'
+        verbose_name_plural = 'Itens dos Carrinhos'
+
     def __str__(self):
-        return f'{self.produto} --> Un. {self.quantidade}'
+        return f'{self.produto}'
     
     @property
     def total(self):
