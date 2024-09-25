@@ -38,4 +38,4 @@ class ItemCarrinhoViewSet(viewsets.ModelViewSet):
         if not carrinho:
             raise ValidationError("Carrinho inválido ou não pertence ao usuário.")
         
-        serializer.save(carrinho=carrinho_id, usuario=self.request.user)
+        serializer.save(carrinho=carrinho)
