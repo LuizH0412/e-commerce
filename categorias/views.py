@@ -7,6 +7,10 @@ from categorias.filters import CategoriaFilterClass
 
 
 class CategoriaViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para o modelo Categoria.
+    Fornece operações CRUD (Create, Read, Update, Delete) para categorias.
+    """
     queryset = Categoria.objects.all()
     serializer_class = CategoriaSerializer
     permission_classes = (IsAuthenticated, DjangoModelPermissions)

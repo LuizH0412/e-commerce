@@ -6,6 +6,10 @@ from dj_rql.drf import RQLFilterBackend
 from produtos.filters import ProdutoFilterClass
 
 class ProdutoViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para manipulação do modelo Produto.
+    Este ViewSet fornece uma interface completa para operações CRUD.
+    """
     queryset = Produto.objects.all()
     serializer_class = ProdutoSerializer
     permission_classes = (IsAuthenticated, DjangoModelPermissions)
