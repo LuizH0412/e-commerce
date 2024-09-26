@@ -47,6 +47,8 @@ INSTALLED_APPS = [
     'categorias',
     'pedidos',
     'usuarios',
+    'favoritos',
+
     'authentication',
 ]
 
