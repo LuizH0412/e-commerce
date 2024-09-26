@@ -1,7 +1,7 @@
 from django.db.models.signals import post_save, post_delete, pre_save
 from django.dispatch import receiver
 from django.core.exceptions import ValidationError
-from carrinho.models import ItemCarrinho
+from pedidos.models import ItemCarrinho
 
 @receiver(pre_save, sender=ItemCarrinho)
 def verificar_estoque_pre_save(sender, instance, **kwargs):

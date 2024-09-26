@@ -12,4 +12,7 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated, DjangoModelPermissions)
     filter_backends = [RQLFilterBackend,]
     rql_filter_class = UsuarioFilterClass
+
+
+
     
