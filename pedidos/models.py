@@ -2,6 +2,12 @@ from django.db import models
 from django.contrib.auth.models import User
 from produtos.models import Produto
 
+CHOICE_STATUS = (
+    ('Pendente', 'Pendente'),
+    ('Pago', 'Pago'),
+    ('Cancelado', 'Cancelado')
+)
+
 class Pedido(models.Model):
     """
     Representa um pedido feito por um usuário.
@@ -13,6 +19,7 @@ class Pedido(models.Model):
     """
 
     usuario = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Usuário')
+    status = models.CharField(max_length=200, choices=CHOICE_STATUS, verbose_name='Status do Pedido', default='Pendente')
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     atualizacao = models.DateTimeField(auto_now=True, verbose_name='Ultima Atualização')
 

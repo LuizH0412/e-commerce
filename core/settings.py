@@ -156,3 +156,7 @@ SIMPLE_JWT = {
     "ACCESS_TOKEN_LIFETIME": timedelta(minutes=60),
     "REFRESH_TOKEN_LIFETIME": timedelta(days=365),
 }
+
+# Mercado Pago
+
+MERCADO_PAGO_ACCESS_TOKEN = config('PAYMENT_API_KEY')

@@ -2,9 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 
 CHOICES_GENERO = (
-    ('MASC', 'Masculino'),
-    ('FEM', 'Feminino'),
-    ('OTHER', 'Outros')
+    ('Masculino', 'Masculino'),
+    ('Feminino', 'Feminino'),
+    ('Outros', 'Outros')
 )
 
 class Perfil(models.Model):
