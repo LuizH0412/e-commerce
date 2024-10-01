@@ -9,5 +9,6 @@ urlpatterns = [
     path('api/v1/', include('authentication.urls')),
     path('api/v1/', include('pedidos.urls')),
     path('api/v1/', include('usuarios.urls')),
-    path('api/v1/', include('favoritos.urls'))
+    path('api/v1/', include('favoritos.urls')),
+    path('api/v1/', include('pagamentos.urls'))
 ]

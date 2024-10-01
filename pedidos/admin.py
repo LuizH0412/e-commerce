@@ -36,7 +36,7 @@ class PedidoAdmin(admin.ModelAdmin):
         list_display (tuple): Campos a serem exibidos na lista de pedidos.
         inlines (list): Listagem dos modelos inline a serem exibidos na página de pedidos.
     """
-    list_display = ('usuario', 'data_criacao', 'atualizacao', 'get_total')
+    list_display = ('usuario', 'data_criacao', 'atualizacao', 'get_total', 'status')
     inlines = [ItemCarrinhoInline]
 
     def get_total(self, obj):

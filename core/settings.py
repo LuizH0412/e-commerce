@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'pedidos',
     'usuarios',
     'favoritos',
+    'pagamentos',
 
     'authentication',
 ]
