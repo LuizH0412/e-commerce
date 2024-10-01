@@ -32,9 +32,5 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     rql_filter_class = UsuarioFilterClass
 
 
-class RedefinirSenhaViewSet(viewsets.ModelViewSet):
-    que
-
-
 
     

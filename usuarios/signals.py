@@ -1,5 +1,7 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.core.mail import send_mail
+from core import settings
 from django.contrib.auth.models import User, Group
 from .models import Perfil
 
@@ -41,3 +43,23 @@ def salvar_perfil_usuario(sender, instance, **kwargs):
         **kwargs: Argumentos adicionais que podem ser passados.
     """
     instance.perfil.save()
+
+@receiver(post_save, sender=User)
+def email_de_boas_vindas(sender, created, instance, **kwargs):
+    """
+    Envia um e-mail de boas-vindas quando um novo usuário é criado.
+    
+    Args:
+        sender: O modelo que enviou o sinal (User).
+        instance: A instância do usuário recém-criado.
+        created (bool): Indica se a instância foi criada ou apenas atualizada.
+    """
+    
+    if created:
+        assunto = 'Boas vindas!'
+        mensagem = f'Olá {instance.username}!\nObrigado por se cadastrar em nosso site!'
+        remetente = settings.EMAIL_HOST_USER
+        destinatario = [instance.email]
+
+        send_mail(assunto, mensagem, remetente, destinatario)
+        
