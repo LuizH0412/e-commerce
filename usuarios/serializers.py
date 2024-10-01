@@ -51,3 +51,19 @@ class UsuarioSerializer(serializers.ModelSerializer):
             user.set_password(validated_data['password'])
             user.save()
             return user
+    
+    def validate_email(self, value):
+        """
+        Valida se o e-mail já está em uso.
+
+        Args:
+            value (str): O e-mail a ser validado.
+
+        Raises:
+            serializers.ValidationError: Se o e-mail já estiver em uso.
+
+        Returns:
+            str: O e-mail validado.
+        """
+        if User.objects.filter(email=value).exists():
+            raise serializers.ValidationError("Este email já está em uso!")
