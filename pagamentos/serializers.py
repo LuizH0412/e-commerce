@@ -11,13 +11,17 @@ class PagamentoSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Pagamento
-        fields = ['pedido', 'link_pagamento', 'status']  # Inclua os campos necessários
-        read_only_fields = ['link_pagamento', 'status']  # Torna 'link_pagamento' e 'status' somente leitura
+        fields = ['pedido', 'link_pagamento', 'status'] 
+        read_only_fields = ['link_pagamento', 'status'] 
 
     def create(self, validated_data):
-        # O pedido é recebido diretamente do validated_data
+        """
+        Cria uma nova instância do modelo Pagamento a partir dos dados validados.
+
+        :param validated_data: Dicionário contendo os dados validados para criar o pagamento.
+        :return: A nova instância do pagamento criada.
+        """
         pedido = validated_data.pop('pedido')
         
-        # Aqui você pode adicionar a lógica de criação do pagamento
         pagamento = Pagamento.objects.create(pedido=pedido, **validated_data)
         return pagamento

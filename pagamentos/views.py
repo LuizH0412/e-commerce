@@ -10,12 +10,34 @@ from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 from dj_rql.drf import RQLFilterBackend
 
 class PagamentoViewSet(viewsets.ModelViewSet):
+    """
+    ViewSet para gerenciar pagamentos.
+    
+    Permite operações CRUD para o modelo Pagamento.
+    Utiliza permissões de autenticação e controle de acesso baseado em modelos.
+    Inclui suporte para filtragem usando RQL.
+    """
     queryset = Pagamento.objects.all()
     permission_classes = (IsAuthenticated, DjangoModelPermissions)
     serializer_class = PagamentoSerializer
     filter_backends = [RQLFilterBackend]
 
     def create(self, request, *args, **kwargs):
+        """
+        Cria um novo pagamento e redireciona para o Mercado Pago.
+        
+        Recebe dados do pedido, valida, e cria uma preferência de pagamento
+        no Mercado Pago. Retorna a URL de pagamento gerada ou um erro, se
+        algo falhar.
+
+        Args:
+            request: O objeto da requisição HTTP.
+            *args: Argumentos adicionais.
+            **kwargs: Argumentos de palavras-chave adicionais.
+
+        Returns:
+            Response: Retorna uma resposta HTTP com a URL de pagamento ou erros de validação.
+        """
         serializer = PagamentoSerializer(data=request.data)
 
         if serializer.is_valid():
