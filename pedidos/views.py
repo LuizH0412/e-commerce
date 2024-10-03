@@ -48,15 +48,15 @@ class ItemCarrinhoViewSet(viewsets.ModelViewSet):
         """
         Retorna o queryset filtrado para mostrar apenas os itens do carrinho do usuário autenticado.
         """
-        return self.queryset.filter(carrinho__usuario=self.request.user)
+        return self.queryset.filter(pedido__usuario=self.request.user)
     
     def perform_create(self, serializer):
         """
         Salva o novo item do carrinho, garantindo que ele esteja associado a um pedido válido do usuário autenticado.
         """
-        carrinho_id = self.request.data.get('pedidos')
+        pedido_id = self.request.data.get('pedido')
 
-        pedido = Pedido.objects.filter(id=carrinho_id, usuario=self.request.user).first()
+        pedido = Pedido.objects.filter(id=pedido_id, usuario=self.request.user).first()
         if not pedido:
             raise ValidationError("Pedido inválido ou não pertence ao usuário.")
         

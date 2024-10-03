@@ -7,6 +7,7 @@ class ProdutoSerializer(serializers.ModelSerializer):
     O ModelSerializer fornece uma maneira fácil de criar um serializer
     baseado em um modelo Django.
     """
+
     class Meta:
         model = Produto
         fields = '__all__'

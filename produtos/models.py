@@ -11,6 +11,7 @@ class Produto(models.Model):
     preco = models.DecimalField(default=0.00, max_digits=100, decimal_places=2, verbose_name='Preço')
     estoque = models.IntegerField(verbose_name='Quantidade')
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT, verbose_name='Categoria')
+    avaliacao = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, verbose_name='Média de Avaliação')
     data_criacao = models.DateTimeField(auto_now_add=True, verbose_name='Criado em')
     atualizacao = models.DateTimeField(auto_now=True, verbose_name='Ultima Atualização')
 
@@ -20,3 +21,14 @@ class Produto(models.Model):
         Usado em interfaces administrativas e quando o objeto é chamado.
         """
         return self.nome
+    
+    def calcular__media_avaliacoes(self):
+        avaliacoes = self.avaliacoes.all()
+        if avaliacoes.exists():
+            return avaliacoes.aggregate(models.Avg('estrelas'))['estrelas__avg']
+        return 0
+
+
+    def atualizar_avaliacao(self):
+        self.avaliacao = self.calcular__media_avaliacoes()
+        self.save()
