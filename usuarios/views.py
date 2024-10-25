@@ -37,10 +37,12 @@ class UsuarioViewSet(viewsets.ModelViewSet):
         Permite a criação (POST) sem autenticação, mas requer autenticação para outras operações.
         """
         if self.action == 'create':
-           # if 
-            return [AllowAny()]  # Permitir qualquer um criar um usuário
+            if self.request.user.is_authenticated:
+                return [IsAuthenticated(), DjangoModelPermissions()]
+            else:
+              return [AllowAny()]
         else:
-            return [IsAuthenticated(), DjangoModelPermissions()]  # Requer autenticação para as outras operações
+            return [IsAuthenticated(), DjangoModelPermissions()]  
 
 
 
