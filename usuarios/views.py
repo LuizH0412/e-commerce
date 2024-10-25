@@ -2,7 +2,7 @@ from rest_framework import viewsets
 from usuarios.serializers import UsuarioSerializer, PerfilSerializer
 from django.contrib.auth.models import User
 from .models import Perfil
-from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
+from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions, AllowAny
 from dj_rql.drf import RQLFilterBackend
 from usuarios.filters import UsuarioFilterClass, PerfilFilterClass
 
@@ -28,9 +28,20 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UsuarioSerializer
-    permission_classes = (DjangoModelPermissions)
     filter_backends = [RQLFilterBackend,]
     rql_filter_class = UsuarioFilterClass
+
+    def get_permissions(self):
+        """
+        Retorna as permissões apropriadas para cada ação.
+        Permite a criação (POST) sem autenticação, mas requer autenticação para outras operações.
+        """
+        if self.action == 'create':
+           # if 
+            return [AllowAny()]  # Permitir qualquer um criar um usuário
+        else:
+            return [IsAuthenticated(), DjangoModelPermissions()]  # Requer autenticação para as outras operações
+
 
 
 

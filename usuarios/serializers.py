@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from .validators import CustomUniqueValidator
 from django.contrib.auth.models import User
 from .models import Perfil
 
@@ -19,7 +20,10 @@ class UsuarioSerializer(serializers.ModelSerializer):
         create(validated_data): Cria e salva um novo usuário com os dados validados.
     """
     password = serializers.CharField(write_only=True, required=True)
-    email = serializers.EmailField(required=True)
+    email = serializers.EmailField(
+        required=True,
+        validators=[CustomUniqueValidator(queryset=User.objects.all())]
+    )
     is_superuser = serializers.BooleanField(required=False)
 
     class Meta:
