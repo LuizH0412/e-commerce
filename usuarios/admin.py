@@ -16,5 +16,5 @@ class PerfilAdmin(admin.ModelAdmin):
         search_fields (tuple): Campos do modelo que podem ser pesquisados
                                no painel de administração.
     """
-    list_display = ('nome_completo', 'data_nascimento', 'telefone')
+    list_display = ('usuario', 'nome_completo', 'data_nascimento', 'telefone')
     search_fields = ('nome_completo', 'cpf', 'data_nascimento')

@@ -1,9 +1,10 @@
 from rest_framework import viewsets
-from usuarios.serializers import UsuarioSerializer
+from usuarios.serializers import UsuarioSerializer, PerfilSerializer
 from django.contrib.auth.models import User
+from .models import Perfil
 from rest_framework.permissions import IsAuthenticated, DjangoModelPermissions
 from dj_rql.drf import RQLFilterBackend
-from usuarios.filters import UsuarioFilterClass
+from usuarios.filters import UsuarioFilterClass, PerfilFilterClass
 
 
 class UsuarioViewSet(viewsets.ModelViewSet):
@@ -27,10 +28,37 @@ class UsuarioViewSet(viewsets.ModelViewSet):
     """
     queryset = User.objects.all()
     serializer_class = UsuarioSerializer
-    permission_classes = (IsAuthenticated, DjangoModelPermissions)
+    permission_classes = (DjangoModelPermissions)
     filter_backends = [RQLFilterBackend,]
     rql_filter_class = UsuarioFilterClass
 
 
+
+class PerfilViewSet(viewsets.ModelViewSet):
+    """
+    API ViewSet para gerenciamento de perfis de usuários.
+
+    Este ViewSet permite operações padrão de CRUD no modelo `Perfil`, que armazena informações adicionais sobre os usuários.
+
+    ### Autenticação e Permissões:
+    - **IsAuthenticated**: Os usuários devem estar autenticados para acessar esta API.
+    - **DjangoModelPermissions**: Os usuários devem ter permissões específicas (padrão Django) para executar operações de CRUD.
+
+    ### Atributos:
+    - **queryset**: Conjunto de dados de perfis, utilizando o modelo `Perfil`.
+    - **serializer_class**: `PerfilSerializer` - Valida e serializa os dados de entrada e saída dos perfis.
+    - **permission_classes**: Lista de classes de permissão necessárias para acessar os endpoints.
+    - **filter_backends**: Lista de backends de filtragem, incluindo o `RQLFilterBackend` para permitir filtragem baseada em RQL.
+    - **rql_filter_class**: `PerfilFilterClass` - Classe de filtragem personalizada baseada em RQL.
+
+    ### Exemplo de RQL:
+    - Filtrar perfis por nome: `?nome=like=John*`
+    - Filtrar perfis por idade: `?idade=gt=30`
+    """
+    queryset = Perfil.objects.all()
+    serializer_class = PerfilSerializer
+    permission_classes = (IsAuthenticated, DjangoModelPermissions)
+    filter_backends = [RQLFilterBackend,]
+    rql_filter_class = PerfilFilterClass
 
     

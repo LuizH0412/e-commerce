@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
+from .models import Perfil
 
 class UsuarioSerializer(serializers.ModelSerializer):
     """
@@ -19,17 +20,18 @@ class UsuarioSerializer(serializers.ModelSerializer):
     """
     password = serializers.CharField(write_only=True, required=True)
     email = serializers.EmailField(required=True)
+    is_superuser = serializers.BooleanField(required=False)
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password')
+        fields = ('id', 'username', 'first_name', 'last_name', 'email', 'password', 'is_superuser')
         extra_kwargs = {
             'password': {'write_only': True},
             'email': {'required': True}
         }
 
 
-        def create(self, validated_data):
+    def create(self, validated_data):
             """
         Cria um novo usuário com os dados validados.
 
@@ -42,12 +44,22 @@ class UsuarioSerializer(serializers.ModelSerializer):
         Returns:
             User: O usuário recém-criado.
         """
+            
+            is_superuser = validated_data.pop('is_superuser', False)
+
             user = User(
-                username = validated_data['username'],
-                first_name = validated_data['first_name'],
-                last_name = validated_data['last_name'],
-                email = validated_data['email'],
+            username=validated_data.get('username', ''),
+            first_name=validated_data.get('first_name', ''),
+            last_name=validated_data.get('last_name', ''),
+            email=validated_data.get('email', ''),
             )
+
             user.set_password(validated_data['password'])
             user.save()
             return user
+
+
+class PerfilSerializer(serializers.ModelSerializer):
+     class Meta:
+          model = Perfil
+          fields = '__all__'

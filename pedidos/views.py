@@ -60,4 +60,7 @@ class ItemCarrinhoViewSet(viewsets.ModelViewSet):
         if not pedido:
             raise ValidationError("Pedido inválido ou não pertence ao usuário.")
         
-        serializer.save(pedido=pedido)
+        try:
+            serializer.save(pedido=pedido)
+        except ValidationError as e:
+            raise ValidationError({"error": "Erro ao adicionar item ao carrinho.", "details": str(e)})

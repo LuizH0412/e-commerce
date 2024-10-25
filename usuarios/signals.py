@@ -42,7 +42,8 @@ def salvar_perfil_usuario(sender, instance, **kwargs):
         instance (User): A instância do usuário que foi salva.
         **kwargs: Argumentos adicionais que podem ser passados.
     """
-    instance.perfil.save()
+    if hasattr(instance, 'perfil'):
+        instance.perfil.save()
 
 @receiver(post_save, sender=User)
 def email_de_boas_vindas(sender, created, instance, **kwargs):
