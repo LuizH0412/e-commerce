@@ -4,7 +4,6 @@ from django.core.mail import send_mail
 from core import settings
 from django.contrib.auth.models import User, Group
 from .models import Perfil
-from smtplib import SMTPException
 
 @receiver(post_save, sender=User)
 def criar_perfil_usuario(sender, instance, created, **kwargs):
@@ -62,9 +61,6 @@ def email_de_boas_vindas(sender, created, instance, **kwargs):
         mensagem = f'Olá {instance.username}!\nObrigado por se cadastrar em nosso site!'
         remetente = settings.EMAIL_HOST_USER
         destinatario = [instance.email]
-
-        try:
-            send_mail(assunto, mensagem, remetente, destinatario)
-        except Exception as e:
-            raise Exception(f'Erro: {e}')
+        
+        send_mail(assunto, mensagem, remetente, destinatario)
         
