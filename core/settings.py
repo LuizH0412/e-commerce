@@ -26,7 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-bp6&9^%j7lvn5ja^d-$^z2xp*9f9p@z=+x$6l6-4_ov7dzamu6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['alvarenga06.pythonanywhere.com']
 
@@ -164,22 +164,22 @@ MERCADO_PAGO_ACCESS_TOKEN = config('PAYMENT_API_KEY')
 
 # EMAIL
 
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = config('MY_EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = config('MY_EMAIL_HOST_PASSWORD')
-    DEFAULT_FROM_EMAIL = config('MY_DEFAULT_FROM_EMAIL')
-else:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_PORT = 587
-    EMAIL_USE_TLS = True
-    EMAIL_HOST_USER = config('MY_EMAIL_HOST_USER')
-    EMAIL_HOST_PASSWORD = config('MY_EMAIL_HOST_PASSWORD')
-    DEFAULT_FROM_EMAIL = config('MY_DEFAULT_FROM_EMAIL')
+# if DEBUG:
+#     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+#     EMAIL_HOST = 'smtp.gmail.com'
+#     EMAIL_PORT = 587
+#     EMAIL_USE_TLS = True
+#     EMAIL_HOST_USER = config('MY_EMAIL_HOST_USER')
+#     EMAIL_HOST_PASSWORD = config('MY_EMAIL_HOST_PASSWORD')
+#     DEFAULT_FROM_EMAIL = config('MY_DEFAULT_FROM_EMAIL')
+# else:
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('MY_EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('MY_EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = config('MY_DEFAULT_FROM_EMAIL')
 
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
