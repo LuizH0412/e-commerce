@@ -53,6 +53,8 @@ INSTALLED_APPS = [
     'avaliacoes',
 
     'authentication',
+
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -199,4 +201,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",  # ou o domínio onde seu HTML está hospedado
     'https://alvarenga06.pythonanywhere.com/'
+]
+
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',  # Adicione esta linha
+    'django.middleware.common.CommonMiddleware',
+    ...
 ]
