@@ -192,3 +192,10 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
+
+
+# CORS
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:8000",  # ou o domínio onde seu HTML está hospedado
+]
