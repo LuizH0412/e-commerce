@@ -4,6 +4,9 @@ from django.core.mail import send_mail
 from core import settings
 from django.contrib.auth.models import User, Group
 from .models import Perfil
+import logging
+
+logger = logging.getLogger(__name__)
 
 @receiver(post_save, sender=User)
 def criar_perfil_usuario(sender, instance, created, **kwargs):
@@ -62,5 +65,8 @@ def email_de_boas_vindas(sender, created, instance, **kwargs):
         remetente = settings.EMAIL_HOST_USER
         destinatario = [instance.email]
 
-        send_mail(assunto, mensagem, remetente, destinatario)
+        try:
+            send_mail(assunto, mensagem, remetente, destinatario)
+        except Exception as e:
+            logger.error(f'Falha ao enviar email de boas-vindas: {e}')
         
