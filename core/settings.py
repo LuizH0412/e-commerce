@@ -204,4 +204,4 @@ CORS_ALLOWED_ORIGINS = [
     'https://alvarenga06.pythonanywhere.com/'
 ]
 
-CORS_ALLOW_ALL_ORIGINS = True
+
