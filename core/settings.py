@@ -201,7 +201,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",  # ou o domínio onde seu HTML está hospedado
-    'https://alvarenga06.pythonanywhere.com/api/v1/authentication/token/'
+    'https://alvarenga06.pythonanywhere.com/'
 ]
 
-# CORS_ALLOW_ALL_ORIGINS = True
+CORS_ALLOW_ALL_ORIGINS = True
