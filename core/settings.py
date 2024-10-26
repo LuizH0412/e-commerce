@@ -181,6 +181,14 @@ EMAIL_HOST_USER = config('MY_EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = config('MY_EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = config('MY_DEFAULT_FROM_EMAIL')
 
+
+# Static Files
+
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# Fotos
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 

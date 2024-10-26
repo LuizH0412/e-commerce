@@ -9,6 +9,7 @@ class Produto(models.Model):
     nome = models.CharField(max_length=200, verbose_name='Nome')
     descricao = models.TextField(verbose_name='Descrição')
     preco = models.DecimalField(default=0.00, max_digits=100, decimal_places=2, verbose_name='Preço')
+    fotos = models.ImageField(upload_to='media/', verbose_name='Fotos')
     estoque = models.IntegerField(verbose_name='Quantidade')
     categoria = models.ForeignKey(Categoria, on_delete=models.PROTECT, verbose_name='Categoria')
     avaliacao = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, verbose_name='Média de Avaliação')
