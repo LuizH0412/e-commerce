@@ -51,8 +51,8 @@ A API utiliza **Simple JWT** para autenticação, garantindo segurança nas oper
 1. Clone o repositório:
 
     ```bash
-    git clone https://github.com/seu-usuario/nome-do-repositorio.git
-    cd nome-do-repositorio
+    git clone https://github.com/LuizH0412/e-commerce.git
+    cd e-commerce
     ```
 
 2. Crie e ative um ambiente virtual:
